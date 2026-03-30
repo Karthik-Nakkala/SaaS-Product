@@ -10,10 +10,13 @@ export const useVibeStore = create((set) => ({
   tableData: generateTableData(vibePresets.default.domain),
   prompts: [],
   devMode: false,
+  isPromptHistoryOpen: false,
 
   setVibeText: (text) => set({ vibeText: text }),
   
   toggleDevMode: () => set((state) => ({ devMode: !state.devMode })),
+  
+  togglePromptHistory: () => set((state) => ({ isPromptHistoryOpen: !state.isPromptHistoryOpen })),
 
   generateVibe: async (text) => {
     set({ isGenerating: true });

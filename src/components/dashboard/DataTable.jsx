@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useVibeStore } from '../../store/vibeStore';
 import { Badge, Skeleton } from '../ui/Primitives';
-import { CodeOverlay } from '../devmode/CodeOverlay';
+import { DevAuditTooltip } from '../devmode/DevAuditTooltip';
 import { Edit2, Trash2, ArrowUpDown } from 'lucide-react';
 
 const mockTableHookCode = `
@@ -37,9 +37,11 @@ export function DataTable() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.3 }}
-      className="relative netflix-glass rounded-md overflow-hidden shadow-2xl border border-white/5"
+      className="relative bg-white/10 backdrop-blur-md rounded-md overflow-hidden shadow-2xl border border-white/20"
     >
-      <CodeOverlay componentName="DataTable.jsx" codeSnippet={mockTableHookCode} />
+      <DevAuditTooltip>
+        The table sorting mechanisms are separated from the main render cycle via `useMemo` caching to ensure layout stability when the dataset exceeds 5,000 rows.
+      </DevAuditTooltip>
       
       <div className="p-6 border-b border-white/10 flex justify-between items-center bg-black/40">
         <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">

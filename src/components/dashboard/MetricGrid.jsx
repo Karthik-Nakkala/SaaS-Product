@@ -2,25 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useVibeStore } from '../../store/vibeStore';
 import { Skeleton } from '../ui/Primitives';
-import { CodeOverlay } from '../devmode/CodeOverlay';
+import { DevAuditTooltip } from '../devmode/DevAuditTooltip';
 import * as Icons from 'lucide-react';
-
-const mockMetricStoreCode = `
-// Optimized Metric Hook with Zustand Selector
-import { useStore } from 'zustand';
-
-function useMetrics() {
-  const metrics = useStore(vibeStore, s => s.activeVibe.metrics);
-  return useMemo(() => ({ metrics }), [metrics]);
-}
-`.trim();
 
 const getIcon = (label) => {
   const lc = label.toLowerCase();
   if (lc.includes('revenue') || lc.includes('sales')) return Icons.DollarSign;
   if (lc.includes('user') || lc.includes('patient') || lc.includes('candidate')) return Icons.Users;
-  if (lc.includes('rate') || lc.includes('bounce')) return Icons.Activity;
+  if (lc.includes('rate') || lc.includes('bounce') || lc.includes('inquiries')) return Icons.Activity;
   if (lc.includes('time') || lc.includes('appt')) return Icons.Clock;
+  if (lc.includes('price')) return Icons.Tag;
   return Icons.PieChart;
 };
 
@@ -32,7 +23,9 @@ export function MetricGrid() {
   
   return (
     <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 py-4">
-      <CodeOverlay componentName="MetricGrid.jsx" codeSnippet={mockMetricStoreCode} />
+      <DevAuditTooltip>
+        Metric Hook utilizes Zustand proxy mapping to dynamically inject semantic fallback layouts directly into memory.
+      </DevAuditTooltip>
       
       {activeVibe.metrics.map((m, i) => {
         const Icon = getIcon(m.label);
@@ -57,7 +50,7 @@ export function MetricGrid() {
                 rotateY: 5,
                 boxShadow: `0 30px 60px -10px rgba(0,0,0,0.8), 0 0 20px -5px ${vColor}`
               }}
-              className="card-3d-inner w-full h-full p-6 rounded-md netflix-glass border-b-2 relative overflow-hidden flex flex-col justify-between"
+              className="card-3d-inner w-full h-full p-6 rounded-md bg-white/10 backdrop-blur-md border border-white/20 border-b-[3px] relative overflow-hidden flex flex-col justify-between"
               style={{ borderBottomColor: vColor }}
             >
               <div 

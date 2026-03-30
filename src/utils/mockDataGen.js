@@ -62,6 +62,15 @@ export function generateTableData(vibeDomain, count = 10) {
           col4: `${Math.floor(Math.random() * 40 + 10)}%`
         };
         break;
+      case 'Real Estate':
+        row = {
+          id: `PROP-${300 + i}`,
+          col1: `${Math.floor(Math.random() * 900) + 100} ${['Maple', 'Oak', 'Pine', 'Cedar'][Math.floor(Math.random() * 4)]} St`,
+          col2: ['John Doe', 'Jane Smith', 'Bob Lee'][Math.floor(Math.random() * 3)],
+          status: ['Active', 'Pending', 'Sold'][Math.floor(Math.random() * 3)],
+          date
+        };
+        break;
       default:
         row = {
           id: `ID-${i}`,

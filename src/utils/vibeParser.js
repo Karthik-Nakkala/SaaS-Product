@@ -3,8 +3,8 @@ export const vibePresets = {
     domain: 'Finance & Billing',
     colors: {
       primary: 'emerald',
-      bg: 'bg-emerald-50 dark:bg-emerald-950',
-      text: 'text-emerald-900 dark:text-emerald-100',
+      bg: 'rgba(16, 185, 129, 0.05)',
+      text: 'text-emerald-100',
       accent: 'emerald-600',
     },
     metrics: [
@@ -14,13 +14,14 @@ export const vibePresets = {
       { label: 'Churn Rate', value: '1.2%', trend: '-0.3%' },
     ],
     tableColumns: ['Invoice ID', 'Client', 'Amount', 'Status', 'Date'],
+    sidebarLabels: ['Overview', 'Invoices', 'Ledger', 'Tax Reports', 'Audits'],
   },
   crm: {
     domain: 'CRM & Sales',
     colors: {
       primary: 'violet',
-      bg: 'bg-violet-50 dark:bg-violet-950',
-      text: 'text-violet-900 dark:text-violet-100',
+      bg: 'rgba(139, 92, 246, 0.05)',
+      text: 'text-violet-100',
       accent: 'violet-600',
     },
     metrics: [
@@ -30,13 +31,14 @@ export const vibePresets = {
       { label: 'Win Rate', value: '64%', trend: '+2.5%' },
     ],
     tableColumns: ['Lead Name', 'Company', 'Expected Value', 'Stage', 'Last Contact'],
+    sidebarLabels: ['Dashboard', 'Pipeline', 'Contacts', 'Campaigns', 'Activity'],
   },
   healthcare: {
     domain: 'Healthcare Clinic',
     colors: {
       primary: 'cyan',
-      bg: 'bg-cyan-50 dark:bg-cyan-950',
-      text: 'text-cyan-900 dark:text-cyan-100',
+      bg: 'rgba(6, 182, 212, 0.05)',
+      text: 'text-cyan-100',
       accent: 'cyan-600',
     },
     metrics: [
@@ -46,13 +48,14 @@ export const vibePresets = {
       { label: 'Beds Available', value: '12', trend: '+1' },
     ],
     tableColumns: ['Patient ID', 'Name', 'Department', 'Status', 'Time'],
+    sidebarLabels: ['Clinic Hub', 'Patients', 'Appointments', 'Records', 'Staff'],
   },
   ecommerce: {
     domain: 'E-commerce',
     colors: {
       primary: 'rose',
-      bg: 'bg-rose-50 dark:bg-rose-950',
-      text: 'text-rose-900 dark:text-rose-100',
+      bg: 'rgba(244, 63, 94, 0.05)',
+      text: 'text-rose-100',
       accent: 'rose-600',
     },
     metrics: [
@@ -62,13 +65,14 @@ export const vibePresets = {
       { label: 'Cart Abandonment', value: '62%', trend: '-1.5%' },
     ],
     tableColumns: ['Order ID', 'Customer', 'Items', 'Total', 'Status'],
+    sidebarLabels: ['Storefront', 'Orders', 'Inventory', 'Customers', 'Promotions'],
   },
   hr: {
     domain: 'HR & Recruiting',
     colors: {
       primary: 'indigo',
-      bg: 'bg-indigo-50 dark:bg-indigo-950',
-      text: 'text-indigo-900 dark:text-indigo-100',
+      bg: 'rgba(99, 102, 241, 0.05)',
+      text: 'text-indigo-100',
       accent: 'indigo-600',
     },
     metrics: [
@@ -78,13 +82,14 @@ export const vibePresets = {
       { label: 'Offers Given', value: '7', trend: '0%' },
     ],
     tableColumns: ['Candidate', 'Role', 'Stage', 'Score', 'Applied Date'],
+    sidebarLabels: ['Recruiting', 'Candidates', 'Onboarding', 'Payroll', 'Reviews'],
   },
   analytics: {
     domain: 'Data Analytics',
     colors: {
       primary: 'sky',
-      bg: 'bg-sky-50 dark:bg-sky-950',
-      text: 'text-sky-900 dark:text-sky-100',
+      bg: 'rgba(14, 165, 233, 0.05)',
+      text: 'text-sky-100',
       accent: 'sky-600',
     },
     metrics: [
@@ -94,13 +99,31 @@ export const vibePresets = {
       { label: 'Session Time', value: '2m 14s', trend: '+12s' },
     ],
     tableColumns: ['Page Path', 'Views', 'Bounce Rate', 'Avg Time', 'Exit %'],
+    sidebarLabels: ['Overview', 'Real-time', 'Audiences', 'Acquisition', 'Behavior'],
+  },
+  realestate: {
+    domain: 'Real Estate',
+    colors: {
+      primary: 'amber',
+      bg: 'rgba(245, 158, 11, 0.05)',
+      text: 'text-amber-100',
+      accent: 'amber-600',
+    },
+    metrics: [
+      { label: 'Active Listings', value: '104', trend: '+3%' },
+      { label: 'Pending Sales', value: '27', trend: '+12%' },
+      { label: 'Avg Sale Price', value: '$452k', trend: '+4.5%' },
+      { label: 'New Inquiries', value: '89', trend: '+22%' },
+    ],
+    tableColumns: ['Property ID', 'Address', 'Agent', 'Status', 'Listed Date'],
+    sidebarLabels: ['Portfolio', 'Listings', 'Agents', 'Clients', 'Transactions'],
   },
   default: {
     domain: 'Generic SaaS',
     colors: {
       primary: 'slate',
-      bg: 'bg-slate-50 dark:bg-slate-950',
-      text: 'text-slate-900 dark:text-slate-100',
+      bg: 'rgba(100, 116, 139, 0.05)',
+      text: 'text-slate-100',
       accent: 'slate-600',
     },
     metrics: [
@@ -110,6 +133,7 @@ export const vibePresets = {
       { label: 'Server Load', value: '42%', trend: '-5%' },
     ],
     tableColumns: ['ID', 'Name', 'Category', 'Status', 'Date'],
+    sidebarLabels: ['Dashboard', 'Analytics', 'Team', 'Projects', 'Security'],
   }
 };
 
@@ -120,6 +144,7 @@ export function parseVibe(prompt) {
   if (p.includes('crm') || p.includes('sale') || p.includes('lead')) return vibePresets.crm;
   if (p.includes('health') || p.includes('clinic') || p.includes('doctor')) return vibePresets.healthcare;
   if (p.includes('commerce') || p.includes('shop') || p.includes('store')) return vibePresets.ecommerce;
+  if (p.includes('real') || p.includes('estate') || p.includes('propert')) return vibePresets.realestate;
   if (p.includes('hr') || p.includes('human') || p.includes('recruit')) return vibePresets.hr;
   if (p.includes('analytic') || p.includes('data') || p.includes('metric')) return vibePresets.analytics;
   

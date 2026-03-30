@@ -1,8 +1,10 @@
 import React from 'react';
 import { Layout } from './components/layout/Layout';
 import { MetricGrid } from './components/dashboard/MetricGrid';
+import { LiveChart } from './components/dashboard/LiveChart';
 import { DataTable } from './components/dashboard/DataTable';
 import { PromptHistoryPanel } from './components/dashboard/PromptHistory';
+import { CommandPalette } from './components/layout/CommandPalette';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVibeStore } from './store/vibeStore';
 
@@ -67,11 +69,11 @@ function App() {
           <motion.div 
             initial={{ opacity: 0, height: 0, scale: 0.9 }}
             animate={{ opacity: 1, height: 'auto', scale: 1 }}
-            className="bg-[#111] border-l-4 border-cyan-500 text-cyan-100 px-6 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex items-center gap-4 text-sm mt-4 font-mono z-50 rounded relative overflow-hidden"
+            className="bg-[#111] border-l-4 border-cyan-500 text-cyan-100 px-6 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex items-center gap-4 text-sm mt-4 font-mono z-50 rounded relative overflow-hidden flex-col md:flex-row items-start md:items-center"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
-            <strong className="font-bold tracking-widest text-cyan-400">DEV / MODE / ACTIVE</strong>
-            <span className="opacity-80">Inspect components by hovering & clicking the overlay badges.</span>
+            <strong className="font-bold tracking-widest text-cyan-400">DEV-AUDIT / ACTIVE</strong>
+            <span className="opacity-80">Inspect components by hovering over the "ⓘ" icons for performance insights.</span>
           </motion.div>
         )}
 
@@ -88,14 +90,17 @@ function App() {
               <MetricGrid />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <DataTable />
+              <LiveChart />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <PromptHistoryPanel />
+              <DataTable />
             </motion.div>
           </motion.div>
         </AnimatePresence>
-
+        
+        {/* Render the Slide-over Panel and Command Palette */}
+        <CommandPalette />
+        <PromptHistoryPanel />
       </div>
     </Layout>
   );
