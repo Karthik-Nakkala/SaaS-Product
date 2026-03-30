@@ -11,15 +11,18 @@ export const useVibeStore = create((set) => ({
   prompts: [],
   devMode: false,
   isPromptHistoryOpen: false,
+  activeTabIndex: 0,
 
   setVibeText: (text) => set({ vibeText: text }),
   
   toggleDevMode: () => set((state) => ({ devMode: !state.devMode })),
   
   togglePromptHistory: () => set((state) => ({ isPromptHistoryOpen: !state.isPromptHistoryOpen })),
+  
+  setActiveTab: (index) => set({ activeTabIndex: index }),
 
   generateVibe: async (text) => {
-    set({ isGenerating: true });
+    set({ isGenerating: true, activeTabIndex: 0 });
     
     // Artificial delay to show Skeletons / Framer motion entering
     await new Promise(r => setTimeout(r, 1200));

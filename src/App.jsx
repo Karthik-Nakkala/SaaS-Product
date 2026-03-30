@@ -23,8 +23,11 @@ const itemVariants = {
 };
 
 function App() {
-  const { activeVibe, devMode } = useVibeStore();
-  const titleWords = activeVibe.domain.split(" ");
+  const { activeVibe, devMode, activeTabIndex } = useVibeStore();
+  
+  const currentTabName = activeVibe.sidebarLabels?.[activeTabIndex] || 'Dashboard';
+  // Include tab name in the cinematic title for immediate visual feedback
+  const titleWords = `${activeVibe.domain} ${currentTabName}`.split(" ");
 
   return (
     <Layout>
@@ -79,22 +82,44 @@ function App() {
 
         <AnimatePresence mode="popLayout">
           <motion.div
-            key={activeVibe.domain + "-content"}
+            key={`${activeVibe.domain}-tab-${activeTabIndex}`}
             variants={containerVariants}
             initial="hidden"
             animate="show"
             exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.3 } }}
             className="flex flex-col gap-10 w-full mt-6"
           >
-            <motion.div variants={itemVariants}>
-              <MetricGrid />
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <LiveChart />
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <DataTable />
-            </motion.div>
+            {activeTabIndex === 0 && (
+              <>
+                <motion.div variants={itemVariants}><MetricGrid /></motion.div>
+                <motion.div variants={itemVariants}><LiveChart /></motion.div>
+                <motion.div variants={itemVariants}><DataTable /></motion.div>
+              </>
+            )}
+            {activeTabIndex === 1 && (
+              <>
+                <motion.div variants={itemVariants}><LiveChart /></motion.div>
+                <motion.div variants={itemVariants}><DataTable /></motion.div>
+              </>
+            )}
+            {activeTabIndex === 2 && (
+              <>
+                <motion.div variants={itemVariants}><DataTable /></motion.div>
+                <motion.div variants={itemVariants}><MetricGrid /></motion.div>
+              </>
+            )}
+            {activeTabIndex === 3 && (
+              <>
+                <motion.div variants={itemVariants}><MetricGrid /></motion.div>
+                <motion.div variants={itemVariants}><DataTable /></motion.div>
+                <motion.div variants={itemVariants}><LiveChart /></motion.div>
+              </>
+            )}
+            {activeTabIndex >= 4 && (
+              <>
+                <motion.div variants={itemVariants}><DataTable /></motion.div>
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
         

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVibeStore } from '../../store/vibeStore';
 import { LayoutDashboard, Users, Settings, PieChart, Menu, FolderHeart, ShieldCheck, FileText, Briefcase, ShoppingBag, Stethoscope, Activity, FileLineChart } from 'lucide-react';
@@ -23,7 +23,7 @@ const getIcon = (label) => {
 };
 
 export function Sidebar({ isOpen, toggleOpen }) {
-  const { activeVibe } = useVibeStore();
+  const { activeVibe, activeTabIndex, setActiveTab } = useVibeStore();
   const labels = activeVibe.sidebarLabels || ['Dashboard', 'Analytics', 'Team', 'Projects', 'Security'];
 
   return (
@@ -60,25 +60,31 @@ export function Sidebar({ isOpen, toggleOpen }) {
               exit={{ opacity: 0, x: -10 }}
               transition={{ delay: i * 0.05 }}
             >
-              <NavItem icon={getIcon(lbl)} label={lbl} isOpen={isOpen} active={i === 0} />
+              <NavItem 
+                icon={getIcon(lbl)} 
+                label={lbl} 
+                isOpen={isOpen} 
+                active={i === activeTabIndex} 
+                onClick={() => setActiveTab(i)} 
+              />
             </motion.div>
           ))}
         </AnimatePresence>
       </div>
 
       <div className="p-4 border-t border-[#222] bg-gradient-to-t from-black to-transparent">
-        <NavItem icon={<Settings />} label="Settings" isOpen={isOpen} />
+        <NavItem icon={<Settings />} label="Settings" isOpen={isOpen} active={false} onClick={() => {}} />
       </div>
     </motion.div>
   );
 }
 
-function NavItem({ icon, label, isOpen, active }) {
+function NavItem({ icon, label, isOpen, active, onClick }) {
   const { activeVibe } = useVibeStore();
   const vColor = `var(--color-${activeVibe.domain.split(' ')[0].toLowerCase().replace(/[^a-z]/g, '')}-primary, #e50914)`;
   
   return (
-    <button className={`flex items-center gap-4 px-4 py-3.5 rounded transition-all group relative w-full overflow-hidden ${active ? 'bg-white/5 font-bold tracking-wide' : 'hover:bg-white/10 font-medium tracking-wide opacity-80 hover:opacity-100'}`}>
+    <button onClick={onClick} className={`flex items-center gap-4 px-4 py-3.5 rounded transition-all group relative w-full overflow-hidden ${active ? 'bg-white/5 font-bold tracking-wide' : 'hover:bg-white/10 font-medium tracking-wide opacity-80 hover:opacity-100'}`}>
       <div 
         className="flex-shrink-0 transition-colors drop-shadow-md z-10"
         style={active ? { color: vColor } : { color: '#9CA3AF' }}
