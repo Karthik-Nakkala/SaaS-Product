@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-finance-primary: #10b981;
+  --color-finance-bg: rgba(16, 185, 129, 0.05); /* very subtle glow bg */
+  --color-crm-primary: #8b5cf6;
+  --color-crm-bg: rgba(139, 92, 246, 0.05);
+  --color-healthcare-primary: #06b6d4;
+  --color-healthcare-bg: rgba(6, 182, 212, 0.05);
+  --color-ecommerce-primary: #f43f5e;
+  --color-ecommerce-bg: rgba(244, 63, 94, 0.05);
+  --color-hr-primary: #6366f1;
+  --color-hr-bg: rgba(99, 102, 241, 0.05);
+  --color-analytics-primary: #0ea5e9;
+  --color-analytics-bg: rgba(14, 165, 233, 0.05);
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: dark;
+    background-color: #141414; /* Netflix background */
+    color: #e5e5e5; /* Standard Netflix light grey */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Cinematic 3D Variables */
+  :root {
+    --glass-bg: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  body {
+    background-color: #141414;
+    color: #e5e5e5;
+  }
+}
+
+@layer utilities {
+  .netflix-glass {
+    background: linear-gradient(180deg, rgba(30,30,30,0.4) 0%, rgba(20,20,20,0.8) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  
+  .card-3d-wrapper {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .card-3d-inner {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  }
+
+  /* Subtle shimmer for Netflix black theme */
+  .shimmer {
+    background: #1e1e1e;
+    background-image: linear-gradient(to right, #1e1e1e 0%, #2a2a2a 20%, #1e1e1e 40%, #1e1e1e 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 100%; 
+    animation-duration: 2s;
+    animation-fill-mode: forwards; 
+    animation-iteration-count: infinite;
+    animation-name: placeholderShimmer;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes placeholderShimmer {
+    0% { background-position: -468px 0; }
+    100% { background-position: 468px 0; }
+  }
+}
